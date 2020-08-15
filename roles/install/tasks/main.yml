@@ -1,0 +1,6 @@
+- include_tasks: terraform.yml
+  tags:
+    - terraform
+- include_tasks: terragrunt.yml
+  tags:
+    - terragrunt

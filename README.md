@@ -1,2 +1,2 @@
-# template-ansible
-Minimal Ansible GitHub repo template.
+# ansible-base
+Common tools and libs.
