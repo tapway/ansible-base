@@ -1,0 +1,18 @@
+- name: Check if reboot is required
+  stat:
+    path: /var/run/reboot-required
+    get_md5: no
+  register: reboot_required
+  tags:
+    - os_update
+    - reboot
+
+- name: Reboot system if required
+  become: true
+  reboot:
+    msg: Rebooting to complete system upgrade
+    reboot_timeout: 120
+  when: reboot_required.stat.exists
+  tags:
+    - os_update
+    - reboot
