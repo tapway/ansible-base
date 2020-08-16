@@ -1,0 +1,25 @@
+- name: Install base apt packages
+  become: true
+  apt:
+    name:
+      - htop
+      - byobu
+      - unzip
+      - apt-transport-https
+      - ca-certificates
+      - lsb-release
+      - git
+      - direnv
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ cache_valid_time }}"
+  tags:
+    - apt
+
+- name: Add direnv shell hook
+  lineinfile:
+    line: eval "$(direnv hook bash)"
+    state: present
+    path: "~/.bashrc"
+  tags:
+    - apt
