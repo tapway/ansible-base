@@ -1,0 +1,25 @@
+- name: Add PPA for hstr
+  become: true
+  apt_repository:
+    repo: 'ppa:ultradvorka/ppa'
+    state: present
+  register: hstr_added
+  tags:
+    - hstr
+
+- name: Install hstr
+  become: true
+  when: hstr_added is changed
+  apt:
+    name:
+      - hstr
+    state: present
+    update_cache: yes
+  tags:
+    - hstr
+
+- name: Update user .bashrc
+  when: hstr_added is changed
+  shell: hstr --show-configuration >> ~/.bashrc
+  tags:
+    - hstr
