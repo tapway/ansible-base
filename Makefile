@@ -7,3 +7,6 @@ help:  ## Display this help
 
 init:  ## Cold start
 	pre-commit install
+
+run:  ## Run at localhost
+	ansible-playbook playbook.yml -l localhost

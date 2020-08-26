@@ -2,14 +2,16 @@
   become: true
   apt:
     name:
-      - htop
-      - byobu
-      - unzip
       - apt-transport-https
+      - byobu
       - ca-certificates
-      - lsb-release
-      - git
       - direnv
+      - git
+      - htop
+      - iotop
+      - lsb-release
+      - multitail
+      - unzip
     state: latest
     update_cache: yes
     cache_valid_time: "{{ cache_valid_time }}"
