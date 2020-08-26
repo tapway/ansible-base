@@ -2,6 +2,10 @@
   tags:
     - apt
 
+- include_tasks: hstr.yml
+  tags:
+    - hstr
+
 - include_tasks: terraform.yml
   tags:
     - terraform
@@ -10,6 +14,6 @@
   tags:
     - terragrunt
 
-- include_tasks: hstr.yml
+- include_tasks: packer.yml
   tags:
-    - hstr
+    - packer
