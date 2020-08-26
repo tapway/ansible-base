@@ -18,7 +18,6 @@
 
 - name: Install terraform
   become: true
-  when: terraform_added is changed
   apt:
     name: terraform
     state: latest
