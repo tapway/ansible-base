@@ -10,7 +10,7 @@
   become: true
   when: version is changed
   unarchive:
-    src: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
+    src: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_{{ packer_binary }}.zip"
     dest: /usr/bin
     mode: "755"
     remote_src: yes
