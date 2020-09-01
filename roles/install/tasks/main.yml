@@ -17,3 +17,7 @@
 - include_tasks: packer.yml
   tags:
     - packer
+
+- include_tasks: terraformdocs.yml
+  tags:
+    - terraform-docs
