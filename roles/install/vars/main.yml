@@ -6,3 +6,6 @@ packer_binary: linux_amd64
 
 terraform_docs_version: "v0.9.1"
 terraform_docs_binary: linux-amd64
+
+tflint_version: "0.19.1"
+tflint_binary: linux_amd64
