@@ -21,3 +21,7 @@
 - include_tasks: terraform-docs.yml
   tags:
     - terraform-docs
+
+- include_tasks: tflint.yml
+  tags:
+    - tflint
