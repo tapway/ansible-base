@@ -25,3 +25,7 @@
 - include_tasks: tflint.yml
   tags:
     - tflint
+
+- include_tasks: vagrant.yml
+  tags:
+    - vagrant
