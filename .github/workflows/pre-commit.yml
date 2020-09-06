@@ -1,0 +1,25 @@
+name: Tests
+
+on:
+  - pull_request
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    name: Check all files with pre-commit
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: x64
+
+      - uses: actions/checkout@v2
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Init
+        run: make init
+
+      - name: Check files
+        run: pre-commit run --all-files
