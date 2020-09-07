@@ -1,0 +1,29 @@
+- name: Check poetry version
+  command: poetry -V
+  register: version
+  changed_when: "version.rc != 0"
+  failed_when: False
+  tags:
+    - poetry
+
+- name: Install poetry
+  when: version is changed
+  shell:
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
+  tags:
+    - poetry
+
+- name: Enable tab completion for Bash
+  when: version is changed
+  shell:
+    poetry completions bash >> ~/.bash_completion
+  tags:
+    - poetry
+
+- name: Update poetry
+  register: update
+  changed_when: "'You are using the latest version' not in update.stdout"
+  shell:
+    poetry self update
+  tags:
+    - poetry

@@ -29,3 +29,7 @@
 - include_tasks: vagrant.yml
   tags:
     - vagrant
+
+- include_tasks: poetry.yml
+  tags:
+    - poetry
