@@ -5,6 +5,7 @@
   failed_when: False
   tags:
     - vagrant
+    - vm
 
 - name: Install vagrant
   become: true
@@ -16,3 +17,11 @@
     remote_src: yes
   tags:
     - vagrant
+    - vm
+
+- name: Update vagrant plugins
+  shell:
+    vagrant plugin update
+  tags:
+    - vagrant
+    - vm
