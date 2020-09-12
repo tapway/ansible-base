@@ -23,3 +23,5 @@
       # https://unix.stackexchange.com/a/265649/204020
       export HISTCONTROL=ignoreboth:erasedups
     path: ~/.bashrc
+  tags:
+    - shell

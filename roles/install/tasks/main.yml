@@ -46,4 +46,8 @@
 
 - include_tasks: shell_mods.yml
   tags:
-    - apt
+    - shell
+
+- include_tasks: pre_commit.yml
+  tags:
+    - pre-commit

@@ -1,4 +1,23 @@
 # ansible-base
-Ansible playbook for install common tools and libs to the Ubuntu/Debian Linux sever. All tasks tagged.
 
-Execute `make run` for play all tasks at `localhost` or read `ansible` docs for more precise command.
+## Table of Contents
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+## Getting Started
+Ansible playbook with libs, tools and shell tweaks.
+
+### Prerequisites
+- Ubuntu/Debian Linux sever.
+### Installation
+- `git clone git@github.com:IaroslavR/ansible-base.git`
+- `cd ansible-base`
+- `make install`
+## Usage
+- `make run` for play all tasks at `localhost`
+
+Follow official `ansible` docs if you want more [precise][at] command or [different][ai] target host.
+
+[at]: https://docs.ansible.com/ansible/latest/user_guide/playbooks_tags.html
+[ai]: https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html

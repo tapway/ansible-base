@@ -11,6 +11,7 @@
       - iotop
       - lsb-release
       - multitail
+      - python3
       - unzip
     state: latest
     update_cache: yes
