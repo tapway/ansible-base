@@ -33,6 +33,6 @@
   register: update
   changed_when: "'You are using the latest version' not in update.stdout"
   shell:
-    poetry self update
+    $HOME/.poetry/bin/poetry self update
   tags:
     - poetry
