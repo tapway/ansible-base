@@ -1,7 +1,7 @@
 - name: Check terragrunt version
   command: terragrunt -v
   register: version
-  changed_when: "terragrunt_version not in version.stdout"
+  changed_when: "version.rc != 0 or terragrunt_version not in version.stdout"
   failed_when: False
   tags:
     - terragrunt

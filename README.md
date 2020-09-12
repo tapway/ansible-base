@@ -11,7 +11,8 @@ Ansible playbook with libs, tools and shell tweaks.
 ### Prerequisites
 - Ubuntu/Debian Linux sever.
 ### Installation
-- `git clone git@github.com:tapway/ansible-base.git`
+- `sudo apt install make`
+- `git clone https://github.com/tapway/ansible-base.git`
 - `cd ansible-base`
 - `make install`
 ## Usage
