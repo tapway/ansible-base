@@ -4,6 +4,12 @@ Host test-tapway-office-ai
 	Port 23
 	User test
 
+Host lan-test-tapway-office-ai
+	HostName 192.168.0.51
+	IdentityFile /home/ubuntu/.ssh/tapway-office-ai_ed25519
+	Port 22
+	User test
+
 Host github.com
 	IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
 	User git
