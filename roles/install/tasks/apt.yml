@@ -19,9 +19,10 @@
     - apt
 
 - name: Add direnv shell hook
-  lineinfile:
-    line: eval "$(direnv hook bash)"
-    state: present
-    path: "~/.bashrc"
+  blockinfile:
+    marker: "# {mark} direnv ANSIBLE MANAGED BLOCK"
+    block: |
+      eval "$(direnv hook bash)"
+    path: ~/.bashrc
   tags:
     - apt

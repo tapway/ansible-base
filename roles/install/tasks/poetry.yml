@@ -20,6 +20,15 @@
   tags:
     - poetry
 
+- name: Shell profile setup
+  blockinfile:
+    marker: "# {mark} poetry ANSIBLE MANAGED BLOCK"
+    block: |
+      export PATH="$HOME/.poetry/bin:$PATH"
+    path: ~/.bashrc
+  tags:
+    - poetry
+
 - name: Update poetry
   register: update
   changed_when: "'You are using the latest version' not in update.stdout"
