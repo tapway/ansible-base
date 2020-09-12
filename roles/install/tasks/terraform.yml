@@ -4,6 +4,9 @@
   apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     state: present
+  tags:
+    - terraform
+    - apt
 
 - name: Add terraform apt repository
   become: true
@@ -15,6 +18,7 @@
   register: terraform_added
   tags:
     - terraform
+    - apt
 
 - name: Install terraform
   become: true
@@ -24,3 +28,4 @@
     update_cache: yes
   tags:
     - terraform
+    - apt

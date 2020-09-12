@@ -5,10 +5,12 @@
 - include_tasks: hstr.yml
   tags:
     - hstr
+    - apt
 
 - include_tasks: terraform.yml
   tags:
     - terraform
+    - apt
 
 - include_tasks: terragrunt.yml
   tags:
@@ -33,3 +35,15 @@
 - include_tasks: poetry.yml
   tags:
     - poetry
+
+- include_tasks: pipx.yml
+  tags:
+    - pipx
+
+- include_tasks: pyenv.yml
+  tags:
+    - pyenv
+
+- include_tasks: shell_mods.yml
+  tags:
+    - apt
