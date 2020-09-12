@@ -6,19 +6,20 @@
   register: hstr_added
   tags:
     - hstr
+    - apt
 
 - name: Install hstr
   become: true
-  when: hstr_added is changed
   apt:
     name:
       - hstr
-    state: present
+    state: latest
     update_cache: yes
   tags:
     - hstr
+    - apt
 
-- name: Update user .bashrc
+- name: Shell profile setup
   when: hstr_added is changed
   shell: hstr --show-configuration >> ~/.bashrc
   tags:

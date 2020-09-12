@@ -1,0 +1,33 @@
+- name: Check pipx version
+  command: pipx --version
+  register: version
+  changed_when: "version.rc != 0"
+  failed_when: False
+  tags:
+    - pipx
+
+- name: Install pipx
+  when: version is changed
+  shell:
+    python3 -m pip install --user pipx
+    python3 -m pipx ensurepath
+  tags:
+    - pipx
+
+- name: Shell profile setup
+  blockinfile:
+    marker: "# {mark} pipx ANSIBLE MANAGED BLOCK"
+    block: |
+      export PATH=~/.local/bin:$PATH
+      # eval "$(register-python-argcomplete pipx)"
+    path: ~/.bashrc
+  tags:
+    - pipx
+
+- name: Update pipx
+  register: update
+  changed_when: "'Collecting pipx' in update.stdout"
+  shell:
+    python3 -m pip install --user -U pipx
+  tags:
+    - pipx
