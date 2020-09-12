@@ -1,6 +1,12 @@
+Host test-tapway-office-ai
+	HostName tapway-office.dyndns.biz
+	IdentityFile {{ ansible_env.HOME }}/.ssh/tapway-office-ai_ed25519
+	Port 23
+	User test
+
 Host github.com
-	User git
 	IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
+	User git
 
 Host *
     IdentitiesOnly yes
