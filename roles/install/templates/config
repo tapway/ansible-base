@@ -1,0 +1,11 @@
+Host github.com
+	User git
+	IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
+
+Host *
+    IdentitiesOnly yes
+    ControlMaster auto
+    ControlPath /tmp/%r@%h-%p
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+    AddressFamily inet

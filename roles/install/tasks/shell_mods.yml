@@ -40,4 +40,11 @@
     path: "{{ ansible_env.HOME }}/.ssh"
     state: directory
   tags:
-    - shell
+    - ssh
+
+- name: Create base SSH config file
+  template:
+    src: config
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+  tags:
+    - ssh

@@ -44,10 +44,12 @@
   tags:
     - pyenv
 
-- include_tasks: shell_mods.yml
-  tags:
-    - shell
-
 - include_tasks: pre_commit.yml
   tags:
     - pre-commit
+
+- include_tasks: shell_mods.yml
+  tags:
+    - shell
+    - pipx
+    - ssh
