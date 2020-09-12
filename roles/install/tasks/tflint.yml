@@ -10,7 +10,7 @@
   become: true
   when: version is changed
   unarchive:
-    src: "https://github.com/terraform-linters/tflint/releases/download/{{ tflint_version }}/tflint_{{ tflint_binary }}.zip"
+    src: "https://github.com/terraform-linters/tflint/releases/download/v{{ tflint_version }}/tflint_{{ tflint_binary }}.zip"
     dest: /usr/bin
     mode: "755"
     remote_src: yes
