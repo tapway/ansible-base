@@ -13,19 +13,19 @@
   tags:
     - poetry
 
-- name: Enable tab completion for Bash
-  when: version is changed
-  shell:
-    poetry completions bash >> ~/.bash_completion
-  tags:
-    - poetry
-
 - name: Shell profile setup
   blockinfile:
     marker: "# {mark} poetry ANSIBLE MANAGED BLOCK"
     block: |
       export PATH="$HOME/.poetry/bin:$PATH"
     path: ~/.bashrc
+  tags:
+    - poetry
+
+- name: Enable tab completion for Bash
+  when: version is changed
+  shell:
+    poetry completions bash >> ~/.bash_completion
   tags:
     - poetry
 
