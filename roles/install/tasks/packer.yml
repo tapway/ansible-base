@@ -1,7 +1,7 @@
 - name: Check packer version
   command: packer -v
   register: version
-  changed_when: "packer_version not in version.stdout"
+  changed_when: "version.rc != 0 or packer_version not in version.stdout"
   failed_when: False
   tags:
     - packer
