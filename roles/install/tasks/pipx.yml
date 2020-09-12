@@ -10,17 +10,6 @@
   when: version is changed
   shell:
     python3 -m pip install --user pipx
-    python3 -m pipx ensurepath
-  tags:
-    - pipx
-
-- name: Shell profile setup
-  blockinfile:
-    marker: "# {mark} pipx ANSIBLE MANAGED BLOCK"
-    block: |
-      export PATH=~/.local/bin:$PATH
-      # eval "$(register-python-argcomplete pipx)"
-    path: ~/.bashrc
   tags:
     - pipx
 

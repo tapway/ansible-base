@@ -25,3 +25,12 @@
     path: ~/.bashrc
   tags:
     - shell
+
+- name: Add $HOME/.local to path
+  blockinfile:
+    marker: "# {mark} pipx ANSIBLE MANAGED BLOCK"
+    block: |
+      export PATH=$HOME/.local/bin:$PATH
+    path: ~/.bashrc
+  tags:
+    - pipx
