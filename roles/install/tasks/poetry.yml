@@ -24,11 +24,13 @@
 
 - name: Source bash profile
   shell: source $HOME/.bashrc
+  tags:
+    - poetry
 
 - name: Enable tab completion for Bash
   when: version is changed
   shell:
-    poetry completions bash >> ~/.bash_completion
+    $HOME/.poetry/bin/poetry completions bash >> ~/.bash_completion
   tags:
     - poetry
 
