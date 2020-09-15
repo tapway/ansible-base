@@ -2,7 +2,7 @@
   changed_when: "version.rc != 0"
   failed_when: False
   register: version
-  command: pyenv --version
+  command: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv --version"
 
 - name: Clone pyenv
   when: version is changed
