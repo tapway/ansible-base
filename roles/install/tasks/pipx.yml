@@ -7,9 +7,9 @@
 - name: Install pipx
   when: version is changed
   shell:
-    .pyenv/shims/python -m pip install --user pipx
+    {{ ansible_env.HOME }}/.pyenv/shims/python -m pip install --user pipx
 
 - name: Update pipx
   changed_when: "'Collecting pipx' in update.stdout"
   shell:
-    .pyenv/shims/python -m pip install --user -U pipx
+    {{ ansible_env.HOME }}/.pyenv/shims/python -m pip install --user -U pipx
