@@ -24,4 +24,4 @@ tags:  ## List playbook tags
 tasks:  ## List playbook tasks
 	ansible-playbook playbook.yml --list-tasks
 
-all: install init run
+all: install run
