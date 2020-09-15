@@ -4,13 +4,12 @@
   register: version
   command: pipx --version
 
-
 - name: Install pipx
   when: version is changed
   shell:
-    python3 -m pip install --user pipx
+    .pyenv/shims/python -m pip install --user pipx
 
 - name: Update pipx
   changed_when: "'Collecting pipx' in update.stdout"
   shell:
-    python3 -m pip install --user -U pipx
+    .pyenv/shims/python -m pip install --user -U pipx
