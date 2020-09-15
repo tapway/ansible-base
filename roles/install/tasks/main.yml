@@ -7,6 +7,10 @@
     - apt
     - hstr
 
+- include: packer.yml
+  tags:
+    - packer
+
 - include: terraform.yml
   tags:
     - apt
@@ -16,10 +20,6 @@
   tags:
     - terraform
     - terragrunt
-
-- include: packer.yml
-  tags:
-    - packer
 
 - include: terraform-docs.yml
   tags:
@@ -31,14 +31,9 @@
     - terraform
     - tflint
 
-- include: vagrant.yml
+- include: pyenv.yml
   tags:
-    - vagrant
-    - vm
-
-- include: poetry.yml
-  tags:
-    - poetry
+    - pyenv
     - python
 
 - include: pipx.yml
@@ -46,9 +41,9 @@
     - pipx
     - python
 
-- include: pyenv.yml
+- include: poetry.yml
   tags:
-    - pyenv
+    - poetry
     - python
 
 - name: Install/update pre-commit
@@ -63,6 +58,11 @@
 - include: shell_mods.yml
   tags:
     - shell
+
+- include: vagrant.yml
+  tags:
+    - vagrant
+    - vm
 
 - name: Creates ~/.ssh
   file:
