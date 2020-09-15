@@ -1,4 +1,4 @@
-.PHONY: help init install run
+.PHONY: help init install run tags tasks
 
 .DEFAULT_GOAL = help
 
@@ -17,3 +17,9 @@ init:  ## Cold start
 
 run:  ## Run playbook at localhost
 	ansible-playbook playbook.yml -l localhost
+
+tags:  ## List playbook tags
+	ansible-playbook playbook.yml --list-tags
+
+tasks:  ## List playbook tasks
+	ansible-playbook playbook.yml --list-tasks
