@@ -1,10 +1,8 @@
 - name: Check terraform-docs version
-  command: "terraform-docs -v"
-  register: version
   changed_when: "version.rc != 0 or terraform_docs_version not in version.stdout"
   failed_when: False
-  tags:
-    - terraform-docs
+  register: version
+  command: "terraform-docs -v"
 
 - name: Install terraform-docs
   become: true
@@ -13,5 +11,3 @@
     url: "https://github.com/terraform-docs/terraform-docs/releases/download/{{ terraform_docs_version }}/terraform-docs-{{ terraform_docs_version }}-{{ terraform_docs_binary }}"
     dest: /usr/bin/terraform-docs
     mode: "755"
-  tags:
-    - terraform-docs

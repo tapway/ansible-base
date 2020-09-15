@@ -4,21 +4,15 @@
   apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     state: present
-  tags:
-    - terraform
-    - apt
 
 - name: Add terraform apt repository
   become: true
+  register: terraform_added
   when: key_added is changed
   apt_repository:
     repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     state: present
     mode: "666"
-  register: terraform_added
-  tags:
-    - terraform
-    - apt
 
 - name: Install terraform
   become: true
@@ -26,6 +20,3 @@
     name: terraform
     state: latest
     update_cache: yes
-  tags:
-    - terraform
-    - apt

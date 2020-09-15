@@ -12,3 +12,5 @@ tflint_binary: linux_amd64
 
 vagrant_version: "2.2.10"
 vagrant_binary: linux_amd64
+
+default_python: "3.7.9"  # Default python for user

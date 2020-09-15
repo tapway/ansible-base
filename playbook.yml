@@ -1,4 +1,8 @@
 - hosts: all
   roles:
-    - role: os_update
+    - role: os-update
+      tags:
+        - os-update
     - role: install
+      tags:
+        - install

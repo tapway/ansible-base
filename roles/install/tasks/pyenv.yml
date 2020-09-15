@@ -1,31 +1,15 @@
 - name: Check pyenv version
-  command: pyenv --version
-  register: version
   changed_when: "version.rc != 0"
   failed_when: False
-  tags:
-    - pyenv
+  register: version
+  command: pyenv --version
 
 - name: Install pyenv
   when: version is changed
   shell:
     git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-  tags:
-    - pyenv
 
-- name: Shell profile setup
-  blockinfile:
-    marker: "# {mark} pyenv ANSIBLE MANAGED BLOCK"
-    block: |
-      export PYENV_ROOT="$HOME/.pyenv"
-      export PATH="$PYENV_ROOT/bin:$PATH"
-      if command -v pyenv 1>/dev/null 2>&1; then
-        eval "$(pyenv init -)"
-      fi
-      export BYOBU_PYTHON="$PYENV_ROOT/shims/python3"
-    path: ~/.bashrc
-  tags:
-    - pyenv
+
 
 - name: Update pyenv
   register: update

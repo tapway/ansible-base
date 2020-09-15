@@ -1,55 +1,72 @@
-- include_tasks: apt.yml
+- include: apt.yml
   tags:
     - apt
 
-- include_tasks: hstr.yml
+- include: hstr.yml
   tags:
+    - apt
     - hstr
-    - apt
 
-- include_tasks: terraform.yml
+- include: terraform.yml
+  tags:
+    - apt
+    - terraform
+
+- include: terragrunt.yml
   tags:
     - terraform
-    - apt
-
-- include_tasks: terragrunt.yml
-  tags:
     - terragrunt
 
-- include_tasks: packer.yml
+- include: packer.yml
   tags:
     - packer
 
-- include_tasks: terraform-docs.yml
+- include: terraform-docs.yml
   tags:
+    - terraform
     - terraform-docs
 
-- include_tasks: tflint.yml
+- include: tflint.yml
   tags:
+    - terraform
     - tflint
 
-- include_tasks: vagrant.yml
+- include: vagrant.yml
   tags:
     - vagrant
+    - vm
 
-- include_tasks: poetry.yml
+- include: poetry.yml
   tags:
     - poetry
+    - python
 
-- include_tasks: pipx.yml
+- include: pipx.yml
   tags:
     - pipx
+    - python
 
-- include_tasks: pyenv.yml
+- include: pyenv.yml
   tags:
     - pyenv
+    - python
 
-- include_tasks: pre_commit.yml
+- name: Install/update pre-commit
+  become: yes
+  changed_when: "'Collecting pre-commit' in install.stdout"
+  register: install
+  shell:
+    python3 -m pip install -U pre-commit
   tags:
     - pre-commit
 
-- include_tasks: shell_mods.yml
+- include: shell_mods.yml
   tags:
     - shell
-    - pipx
-    - ssh
+
+- name: Creates ~/.ssh
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+  tags:
+    - always

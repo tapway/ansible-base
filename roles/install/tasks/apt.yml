@@ -21,21 +21,9 @@
       - multitail
       - python3
       - python3-pip
-      - python3-venv
       - unzip
       - wget
       - zlib1g-dev
     state: latest
     update_cache: yes
     cache_valid_time: "{{ cache_valid_time }}"
-  tags:
-    - apt
-
-- name: Add direnv shell hook
-  blockinfile:
-    marker: "# {mark} direnv ANSIBLE MANAGED BLOCK"
-    block: |
-      eval "$(direnv hook bash)"
-    path: ~/.bashrc
-  tags:
-    - apt

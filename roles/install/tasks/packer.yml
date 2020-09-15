@@ -1,10 +1,8 @@
 - name: Check packer version
-  command: packer -v
-  register: version
   changed_when: "version.rc != 0 or packer_version not in version.stdout"
   failed_when: False
-  tags:
-    - packer
+  register: version
+  command: packer -v
 
 - name: Install packer
   become: true
@@ -14,5 +12,3 @@
     dest: /usr/bin
     mode: "755"
     remote_src: yes
-  tags:
-    - packer
