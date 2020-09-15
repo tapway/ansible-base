@@ -2,7 +2,7 @@
   changed_when: "version.rc != 0"
   failed_when: False
   register: version
-  command: poetry -V
+  command: "{{ ansible_env.HOME }}/.poetry/bin/poetry -V"
 
 - name: Install poetry
   when: version is changed
