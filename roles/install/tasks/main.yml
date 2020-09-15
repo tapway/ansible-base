@@ -68,5 +68,3 @@
   file:
     path: "{{ ansible_env.HOME }}/.ssh"
     state: directory
-  tags:
-    - always

@@ -32,6 +32,7 @@
     path: ~/.bashrc
   tags:
     - pipx
+    - python
 
 - name: poetry .bashrc config
   blockinfile:
@@ -41,6 +42,7 @@
     path: ~/.bashrc
   tags:
     - poetry
+    - python
 
 - name: direnv .bashrc config
   blockinfile:
@@ -64,3 +66,4 @@
     path: ~/.bashrc
   tags:
     - pyenv
+    - python
