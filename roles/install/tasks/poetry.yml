@@ -1,38 +1,21 @@
 - name: Check poetry version
-  command: poetry -V
-  register: version
   changed_when: "version.rc != 0"
   failed_when: False
-  tags:
-    - poetry
+  register: version
+  command: poetry -V
 
 - name: Install poetry
   when: version is changed
   shell:
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
-  tags:
-    - poetry
-
-- name: Shell profile setup
-  blockinfile:
-    marker: "# {mark} poetry ANSIBLE MANAGED BLOCK"
-    block: |
-      export PATH="$HOME/.poetry/bin:$PATH"
-    path: ~/.bashrc
-  tags:
-    - poetry
 
 - name: Enable tab completion for Bash
   when: version is changed
   shell:
     $HOME/.poetry/bin/poetry completions bash >> ~/.bash_completion
-  tags:
-    - poetry
 
 - name: Update poetry
-  register: update
   changed_when: "'You are using the latest version' not in update.stdout"
+  register: update
   shell:
     $HOME/.poetry/bin/poetry self update
-  tags:
-    - poetry

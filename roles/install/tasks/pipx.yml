@@ -1,22 +1,16 @@
 - name: Check pipx version
-  command: pipx --version
-  register: version
   changed_when: "version.rc != 0"
   failed_when: False
-  tags:
-    - pipx
+  register: version
+  command: pipx --version
+
 
 - name: Install pipx
   when: version is changed
   shell:
     python3 -m pip install --user pipx
-  tags:
-    - pipx
 
 - name: Update pipx
-  register: update
   changed_when: "'Collecting pipx' in update.stdout"
   shell:
     python3 -m pip install --user -U pipx
-  tags:
-    - pipx
