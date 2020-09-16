@@ -21,9 +21,10 @@
     - base
 
 - name: Copy GitHub SSH key
-  shell: >
-    cat {{ github_key }} > {{ ansible_env.HOME }}/.ssh/github_rsa &&
-    chmod 600 {{ ansible_env.HOME }}/.ssh/github_rsa
+  copy:
+    dest: "{{ ansible_env.HOME }}/.ssh/github_rsa"
+    src: /vagrant/github_rsa
+    mode: "600"
   tags:
     - github
 
