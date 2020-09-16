@@ -16,7 +16,7 @@ init:  ## Cold start
 	pre-commit install
 
 run:  ## Install terraform and tools, Python and tools, packer
-	ansible-playbook playbook.yml -l localhost --skip-tags vm
+	ansible-playbook playbook.yml -l localhost --skip-tags vm --extra-vars "github_key=$(GITHUB_KEY)"
 
 tags:  ## List playbook tags
 	ansible-playbook playbook.yml --list-tags

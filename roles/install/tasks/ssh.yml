@@ -1,5 +1,3 @@
-- set_fact: github_rsa="{{ lookup('env','GITHUB_KEY') }}"
-
 - name: Creates ~/.ssh/config
   file:
     path: "{{ ansible_env.HOME }}/.ssh/config"
@@ -24,8 +22,10 @@
 
 - name: Copy GitHub SSH key
   shell: >
-    cat {{ github_rsa }} > {{ ansible_env.HOME }}/.ssh/github_rsa &&
+    cat {{ github_key }} > {{ ansible_env.HOME }}/.ssh/github_rsa &&
     chmod 600 {{ ansible_env.HOME }}/.ssh/github_rsa
+  tags:
+    - github
 
 - name: Add GitHub to SSH config file
   blockinfile:
@@ -35,3 +35,5 @@
         IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
         User git
     path: "{{ ansible_env.HOME }}/.ssh/config"
+  tags:
+    - github
