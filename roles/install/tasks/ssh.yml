@@ -2,28 +2,36 @@
 
 - name: Creates ~/.ssh
   file:
-    path: "{{ ansible_env.HOME }}/.ssh"
-    state: directory
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+    state: file
+  tags:
+    - base
+
+- name: Create base SSH config file
+  blockinfile:
+    marker: "# {mark} global config ANSIBLE MANAGED BLOCK"
+    block: |
+      Host *
+        IdentitiesOnly yes
+        ControlMaster auto
+        ControlPath /tmp/%r@%h-%p
+        ServerAliveInterval 30
+        ServerAliveCountMax 3
+        AddressFamily inet
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+  tags:
+    - base
 
 - name: Copy GitHub SSH key
   shell: >
     cat {{ github_rsa }} > {{ ansible_env.HOME }}/.ssh/github_rsa &&
     chmod 600 {{ ansible_env.HOME }}/.ssh/github_rsa
 
-- name: Create base SSH config file
+- name: Add GitHub to SSH config file
   blockinfile:
-    marker: "# {mark} ansible-base ANSIBLE MANAGED BLOCK"
+    marker: "# {mark} GitHub config ANSIBLE MANAGED BLOCK"
     block: |
       Host github.com
-          IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
-          User git
-
-      Host *
-          IdentitiesOnly yes
-          ControlMaster auto
-          ControlPath /tmp/%r@%h-%p
-          ServerAliveInterval 30
-          ServerAliveCountMax 3
-          AddressFamily inet
-
+        IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
+        User git
     path: "{{ ansible_env.HOME }}/.ssh/config"
