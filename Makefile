@@ -1,4 +1,4 @@
-.PHONY: help all init install run tags tasks
+.PHONY: help all init install run tasks
 
 .DEFAULT_GOAL = help
 
@@ -15,11 +15,8 @@ install:  ## Install prerequisites
 init:  ## Cold start
 	pre-commit install
 
-run:  ## Install terraform and tools, Python and tools, packer
-	ansible-playbook playbook.yml -l localhost --skip-tags vm
-
-tags:  ## List playbook tags
-	ansible-playbook playbook.yml --list-tags
+run:  ## Install terraform + tools and Python + tools
+	ansible-playbook playbook.yml -l localhost --skip-tags vm,packer
 
 tasks:  ## List playbook tasks
 	ansible-playbook playbook.yml --list-tasks

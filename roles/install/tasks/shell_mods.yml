@@ -23,6 +23,8 @@
       # https://unix.stackexchange.com/a/265649/204020
       export HISTCONTROL=ignoreboth:erasedups
     path: ~/.bashrc
+  tags:
+    - base
 
 - name: Add $HOME/.local to path
   blockinfile:
@@ -52,6 +54,7 @@
     path: ~/.bashrc
   tags:
     - apt
+    - base
 
 - name: pyenv .bashrc config
   blockinfile:

@@ -1,10 +1,12 @@
 - include: apt.yml
   tags:
     - apt
+    - base
 
 - include: hstr.yml
   tags:
     - apt
+    - base
     - hstr
 
 - include: packer.yml
@@ -54,6 +56,7 @@
     python3 -m pip install -U pre-commit
   tags:
     - pre-commit
+    - base
 
 - include: shell_mods.yml
   tags:

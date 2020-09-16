@@ -1,29 +1,40 @@
-- set_fact: github_rsa="{{ lookup('env','GITHUB_KEY') }}"
-
-- name: Creates ~/.ssh
+- name: Creates ~/.ssh/config
   file:
-    path: "{{ ansible_env.HOME }}/.ssh"
-    state: directory
-
-- name: Copy GitHub SSH key
-  shell: >
-    cat {{ github_rsa }} > {{ ansible_env.HOME }}/.ssh/github_rsa &&
-    chmod 600 {{ ansible_env.HOME }}/.ssh/github_rsa
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+    state: touch
+  tags:
+    - base
 
 - name: Create base SSH config file
   blockinfile:
-    marker: "# {mark} ansible-base ANSIBLE MANAGED BLOCK"
+    marker: "# {mark} global config ANSIBLE MANAGED BLOCK"
+    block: |
+      Host *
+        IdentitiesOnly yes
+        ControlMaster auto
+        ControlPath /tmp/%r@%h-%p
+        ServerAliveInterval 30
+        ServerAliveCountMax 3
+        AddressFamily inet
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+  tags:
+    - base
+
+- name: Copy GitHub SSH key
+  copy:
+    dest: "{{ ansible_env.HOME }}/.ssh/github_rsa"
+    src: /vagrant/github_rsa
+    mode: "600"
+  tags:
+    - github
+
+- name: Add GitHub to SSH config file
+  blockinfile:
+    marker: "# {mark} GitHub config ANSIBLE MANAGED BLOCK"
     block: |
       Host github.com
-          IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
-          User git
-
-      Host *
-          IdentitiesOnly yes
-          ControlMaster auto
-          ControlPath /tmp/%r@%h-%p
-          ServerAliveInterval 30
-          ServerAliveCountMax 3
-          AddressFamily inet
-
+        IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
+        User git
     path: "{{ ansible_env.HOME }}/.ssh/config"
+  tags:
+    - github
