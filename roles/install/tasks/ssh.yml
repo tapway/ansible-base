@@ -1,0 +1,29 @@
+- set_fact: github_rsa="{{ lookup('env','GITHUB_KEY') }}"
+
+- name: Creates ~/.ssh
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+
+- name: Copy GitHub SSH key
+  shell: >
+    cat {{ github_rsa }} > {{ ansible_env.HOME }}/.ssh/github_rsa &&
+    chmod 600 {{ ansible_env.HOME }}/.ssh/github_rsa
+
+- name: Create base SSH config file
+  blockinfile:
+    marker: "# {mark} ansible-base ANSIBLE MANAGED BLOCK"
+    block: |
+      Host github.com
+          IdentityFile {{ ansible_env.HOME }}/.ssh/github_rsa
+          User git
+
+      Host *
+          IdentitiesOnly yes
+          ControlMaster auto
+          ControlPath /tmp/%r@%h-%p
+          ServerAliveInterval 30
+          ServerAliveCountMax 3
+          AddressFamily inet
+
+    path: "{{ ansible_env.HOME }}/.ssh/config"
