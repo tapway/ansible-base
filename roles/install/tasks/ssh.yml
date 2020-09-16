@@ -1,9 +1,9 @@
 - set_fact: github_rsa="{{ lookup('env','GITHUB_KEY') }}"
 
-- name: Creates ~/.ssh
+- name: Creates ~/.ssh/config
   file:
     path: "{{ ansible_env.HOME }}/.ssh/config"
-    state: file
+    state: touch
   tags:
     - base
 
