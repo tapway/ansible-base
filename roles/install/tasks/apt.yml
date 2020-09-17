@@ -8,6 +8,7 @@
       - ca-certificates
       - curl
       - direnv
+      - dos2unix
       - git
       - htop
       - iotop
