@@ -17,6 +17,6 @@
 - name: Install terraform
   become: true
   apt:
-    name: terraform
-    state: latest
+    name: terraform=0.13.5
+    state: present
     update_cache: yes
