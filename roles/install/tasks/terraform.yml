@@ -1,11 +1,11 @@
-- name: Check terraform version
-  changed_when: "tf_version.rc != 0"
-  failed_when: False
-  register: tf_version
-  command: terraform --version
+- name: Check if terraform is installed
+  command: dpkg-query -W terraform
+  register: tf_check
+  failed_when: tf_check.rc > 1
+  changed_when: tf_check.rc == 1
 
 - name: Remove previous terraform package
-  changed_when: '"Terraform v0.13.5" not in tf_version.stdout_lines[0]'
+  changed_when: '"terraform 0.13.5" not in tf_check.stdout'
   become: true
   register: tf_remove
   apt:
