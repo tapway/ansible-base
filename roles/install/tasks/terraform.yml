@@ -1,3 +1,17 @@
+- name: Check if terraform is installed
+  command: dpkg-query -W terraform
+  register: tf_check
+  failed_when: tf_check.rc > 1
+  changed_when: tf_check.rc == 1
+
+- name: Remove previous terraform package
+  changed_when: '"terraform 0.13.5" not in tf_check.stdout'
+  become: true
+  register: tf_remove
+  apt:
+    name: terraform
+    state: absent
+
 - name: Add terraform apt-key
   become: true
   register: key_added
@@ -14,9 +28,10 @@
     state: present
     mode: "666"
 
-- name: Install terraform
+- name: Install terraform v0.13.5
+  when: tf_remove is changed
   become: true
   apt:
-    name: terraform
-    state: latest
+    name: terraform=0.13.5
+    state: present
     update_cache: yes

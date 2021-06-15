@@ -13,7 +13,7 @@
 - name: Get latest python version
   when: version is changed
   register: py_version
-  shell: pyenv install --list | grep "3.7" | grep -v - | grep -v b | tail -1
+  shell: '{{ ansible_env.HOME }}/.pyenv/bin/pyenv install --list | grep "3.7" | grep -v - | grep -v b | tail -1'
 
 - name: Install default python for user
   args:
